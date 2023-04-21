@@ -10,8 +10,10 @@ def search1(V: list[int], m: int, x: int) -> int:
     """Search function number 1 - O(n) """
     for i in range(m):
         result.search1_count += 1
-        if V[i] is x:
+
+        if V[i] == x:
             return i
+
         if V[i] == 0:
             return -1
 
@@ -48,7 +50,7 @@ def search2(V: list[int], m: int, x: int) -> int:
 
 def search3(V: list[int], m: int, x: int) -> int:
     """Search function number 3 - O(logn) """
-    n = find_n(V, m)  # O(log100)
+    n = find_n(V, m)  # O(log100) ~ O(1)
 
     high = n - 1
     low = 0
@@ -84,7 +86,6 @@ def find_n(V: list[int], m: int) -> int:
     max_number_index = low
 
     while low <= high:
-        result.search3_count += 1
         mid = (high + low) // 2
 
         if V[mid] > max_number:
@@ -124,7 +125,9 @@ def initial_list(n: int, m: int) -> list[int]:
 
 def main():
     """Main function"""
-    for i in range(500):
+    number_of_iterations = 500
+
+    for i in range(number_of_iterations):
         random_n = random.randint(200, 300)
         m = 1000
         V, x = initial_list(random_n, m)
@@ -133,9 +136,10 @@ def main():
         search2(V, m, x)
         search3(V, m, x)
 
-    print('search1: ', result.get_search1_average())
-    print('search2: ', result.get_search2_average())
-    print('search3: ', result.get_search3_average())
+    print('200<=n<=300')
+    print('search1: ', result.get_search1_average(number_of_iterations))
+    print('search2: ', result.get_search2_average(number_of_iterations))
+    print('search3: ', result.get_search3_average(number_of_iterations))
 
 
 main()
